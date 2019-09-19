@@ -21,7 +21,7 @@ cc_binary(
     linkshared = 1,
     linkstatic = 1,
     deps = [
-        "//mediapipe/graphs/hand_tracking:mobile_calculators",
+        "//mediapipe/graphs/hand_tracking_cpu:mobile_calculators",
         "//mediapipe/java/com/google/mediapipe/framework/jni:mediapipe_framework_jni",
     ],
 )
