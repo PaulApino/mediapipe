@@ -6,7 +6,7 @@ input_stream: "IMAGE:input_image"
 input_stream: "DETECTIONS:detections"
 input_stream: "LANDMARKS:landmarks"
 input_stream: "NORM_RECT:rect"
-output_stream: "IMAGE:output_image"
+output_stream: "IMAGE_GPU:output_image"
 
 # Converts detections to drawing primitives for annotation overlay.
 node {
@@ -98,5 +98,13 @@ node {
   input_stream: "detection_render_data"
   input_stream: "landmark_render_data"
   input_stream: "rect_render_data"
-  output_stream: "OUTPUT_FRAME:output_image"
+  output_stream: "OUTPUT_FRAME:output_image_cpu"
+}
+
+# Transfers the annotated image from CPU back to GPU memory, to be sent out of
+# the graph.
+node: {
+  calculator: "ImageFrameToGpuBufferCalculator"
+  input_stream: "output_image_cpu"
+  output_stream: "output_image"
 }

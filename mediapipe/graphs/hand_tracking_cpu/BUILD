@@ -39,6 +39,8 @@ mediapipe_simple_subgraph(
         "//mediapipe/calculators/util:detections_to_rects_calculator",
         "//mediapipe/calculators/util:non_max_suppression_calculator",
         "//mediapipe/calculators/util:rect_transformation_calculator",
+		"//mediapipe/gpu:gpu_buffer_to_image_frame_calculator",
+        "//mediapipe/gpu:image_frame_to_gpu_buffer_calculator",
     ],
 )
 
