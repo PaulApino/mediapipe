@@ -23,8 +23,8 @@ load(
 )
 
 mediapipe_simple_subgraph(
-    name = "hand_detection_gpu",
-    graph = "hand_detection_gpu.pbtxt",
+    name = "hand_detection_cpu",
+    graph = "hand_detection_cpu.pbtxt",
     register_as = "HandDetectionSubgraph",
     deps = [
         "//mediapipe/calculators/image:image_properties_calculator",
@@ -43,8 +43,8 @@ mediapipe_simple_subgraph(
 )
 
 mediapipe_simple_subgraph(
-    name = "hand_landmark_gpu",
-    graph = "hand_landmark_gpu.pbtxt",
+    name = "hand_landmark_cpu",
+    graph = "hand_landmark_cpu.pbtxt",
     register_as = "HandLandmarkSubgraph",
     deps = [
         "//mediapipe/calculators/core:split_vector_calculator",
@@ -65,8 +65,8 @@ mediapipe_simple_subgraph(
 )
 
 mediapipe_simple_subgraph(
-    name = "renderer_gpu",
-    graph = "renderer_gpu.pbtxt",
+    name = "renderer_cpu",
+    graph = "renderer_cpu.pbtxt",
     register_as = "RendererSubgraph",
     deps = [
         "//mediapipe/calculators/util:annotation_overlay_calculator",
@@ -79,9 +79,9 @@ mediapipe_simple_subgraph(
 cc_library(
     name = "mobile_calculators",
     deps = [
-        ":hand_detection_gpu",
-        ":hand_landmark_gpu",
-        ":renderer_gpu",
+        ":hand_detection_cpu",
+        ":hand_landmark_cpu",
+        ":renderer_cpu",
         "//mediapipe/calculators/core:flow_limiter_calculator",
         "//mediapipe/calculators/core:gate_calculator",
         "//mediapipe/calculators/core:merge_calculator",
@@ -90,24 +90,24 @@ cc_library(
 )
 
 mediapipe_binary_graph(
-    name = "hand_tracking_mobile_gpu_binary_graph",
+    name = "hand_tracking_mobile_cpu_binary_graph",
     graph = "hand_tracking_mobile.pbtxt",
-    output_name = "hand_tracking_mobile_gpu.binarypb",
+    output_name = "hand_tracking_mobile_cpu.binarypb",
     deps = [":mobile_calculators"],
 )
 
 cc_library(
     name = "detection_mobile_calculators",
     deps = [
-        ":hand_detection_gpu",
-        ":renderer_gpu",
+        ":hand_detection_cpu",
+        ":renderer_cpu",
         "//mediapipe/calculators/core:flow_limiter_calculator",
     ],
 )
 
 mediapipe_binary_graph(
-    name = "hand_detection_mobile_gpu_binary_graph",
+    name = "hand_detection_mobile_cpu_binary_graph",
     graph = "hand_detection_mobile.pbtxt",
-    output_name = "hand_detection_mobile_gpu.binarypb",
+    output_name = "hand_detection_mobile_cpu.binarypb",
     deps = [":detection_mobile_calculators"],
 )

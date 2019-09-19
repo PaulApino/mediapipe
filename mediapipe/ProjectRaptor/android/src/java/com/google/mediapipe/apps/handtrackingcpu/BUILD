@@ -37,8 +37,8 @@ cc_library(
 # MainActivity.BINARY_GRAPH_NAME = "appname.binarypb".
 genrule(
     name = "binary_graph",
-    srcs = ["//mediapipe/graphs/hand_tracking:hand_tracking_mobile_gpu_binary_graph"],
-    outs = ["handtrackinggpu.binarypb"],
+    srcs = ["//mediapipe/graphs/hand_tracking_cpu:hand_tracking_mobile_cpu_binary_graph"],
+    outs = ["handtrackingcpu.binarypb"],
     cmd = "cp $< $@",
 )
 
@@ -93,9 +93,9 @@ android_library(
 )
 
 android_binary(
-    name = "handtrackinggpu",
+    name = "handtrackingcpu",
     manifest = "AndroidManifest.xml",
-    manifest_values = {"applicationId": "com.google.mediapipe.apps.handtrackinggpu"},
+    manifest_values = {"applicationId": "com.google.mediapipe.apps.handtrackingcpu"},
     multidex = "native",
     deps = [
         ":mediapipe_lib",
